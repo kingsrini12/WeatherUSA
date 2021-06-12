@@ -1,10 +1,9 @@
 This Python program get the weather data using a API and moves the data to S3
 
-THis requires the followng package to be imported
+This requires the followng package to be imported, Please use the followng commands to install the packages.
 
-import requests
-import json
-import boto3
-from datetime import datetime
+pip install requests
+pip install boto3
+pip install datetime
 
 
