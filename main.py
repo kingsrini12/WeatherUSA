@@ -6,15 +6,13 @@ import json
 import boto3
 from datetime import datetime
 def weatherreport(x,city_name):
+    # parsing all the variables from JSON
     coord = x["coord"]
     current_coordinates = str(coord["lon"]) + ',' + str(coord["lat"])
 
     weather = x["weather"]
     current_weather = str(weather[0]["id"]) + ',' +  str(weather[0]["main"]) \
     + ',' + str(weather[0]["description"]) + ',' +   str(weather[0]["icon"])
-
-  #  current_weather1 = str(weather[1]["id"]) + ',' + str(weather[1]["main"]) \
-  #   + ',' + str(weather[1]["description"]) + ',' + str(weather[1]["icon"])
 
     current_base = str(x["base"])
 
@@ -28,10 +26,6 @@ def weatherreport(x,city_name):
 
     wind = x["wind"]
     current_speed = str(wind["speed"])  + ',' + str(wind["deg"])  #+ ',' + str(wind["gust"])
-
-   # rain = x["rain"]
-   # current_rain=str(rain["1h"])
-   # print(current_rain)
 
     clouds = x["clouds"]
     current_all = str(clouds["all"])
