@@ -1,5 +1,5 @@
 # Python program to find current
-# weather details of any city and Detroit
+# weather details of any city
 
 import requests
 import json
@@ -13,6 +13,9 @@ def weatherreport(x,city_name):
     current_weather = str(weather[0]["id"]) + ',' +  str(weather[0]["main"]) \
     + ',' + str(weather[0]["description"]) + ',' +   str(weather[0]["icon"])
 
+  #  current_weather1 = str(weather[1]["id"]) + ',' + str(weather[1]["main"]) \
+  #   + ',' + str(weather[1]["description"]) + ',' + str(weather[1]["icon"])
+
     current_base = str(x["base"])
 
     main = x["main"]
@@ -24,7 +27,12 @@ def weatherreport(x,city_name):
     current_visibility=str(x["visibility"])
 
     wind = x["wind"]
-    current_speed = str(wind["speed"])  + ',' + str(wind["deg"])  
+    current_speed = str(wind["speed"])  + ',' + str(wind["deg"])  #+ ',' + str(wind["gust"])
+
+   # rain = x["rain"]
+   # current_rain=str(rain["1h"])
+   # print(current_rain)
+
     clouds = x["clouds"]
     current_all = str(clouds["all"])
 
@@ -43,10 +51,11 @@ def weatherreport(x,city_name):
                    current_speed + ',' + current_all + current_dt + ',' + current_sys + ',' + current_timezone + ',' + \
                    current_tz_id + ',' + current_name + ',' + current_cod
 
-    weather_data = 'LoadDate,longitude, latitude,id,Status,description,icon,base,main,feels_like,' \
-                   'temp_min,temp_max,pressure,humidity,visibility,wind,speed,deg,clouds,all,dt,type,id,country,' \
-                   'sunrise,sunset,timezone,id1,name,cod' + '\n' + datetime.strftime(datetime.now(), '%Y%m%d') + \
+
+    weather_data = 'LoadDate,longitude, latitude,id,main,description,icon,base,temp,feels_like,temp_min,temp_max,pressure,humidity,' \
+                   'visibility,speed,deg,ID1,cloudsAll,ID,sunrise,sunset,timezone,ID,name,cod ' + '\n' + datetime.strftime(datetime.now(), '%Y%m%d') + \
                    ',' + weather_data
+
     s3 = boto3.resource('s3')
     object = s3.Object('weatherusa', f'{city_name}.txt')
     object.put(Body=weather_data)
