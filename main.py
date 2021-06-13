@@ -1,5 +1,4 @@
-# Python program to find current
-# weather details of any city
+# Python program to find current  weather details of any city and PUSH to S3
 
 import requests
 import json
